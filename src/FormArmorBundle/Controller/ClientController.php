@@ -1,21 +1,12 @@
 <?php
 
 namespace FormArmorBundle\Controller;
-use FormArmorBundle\Form\ClientType;
-use FormArmorBundle\Form\ClientCompletType;
-use FormArmorBundle\Form\StatutType;
-use FormArmorBundle\Form\FormationType;
-use FormArmorBundle\Form\SessionType;
-use FormArmorBundle\Form\PlanFormationType;
 
-use FormArmorBundle\Entity\Client;
-use FormArmorBundle\Entity\Formation;
-use FormArmorBundle\Entity\Session_formation;
-use FormArmorBundle\Entity\Plan_formation;
-use FormArmorBundle\Entity\Statut;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
+use FormArmorBundle\Form\ClientType;
+use FormArmorBundle\Entity\Client;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class ClientController extends Controller
 {
@@ -43,7 +34,9 @@ class ClientController extends Controller
 				$nbClient = $rep->verifMDP($nom, $mdp);
 				if ($nbClient > 0)
 				{
-					return $this->render('FormArmorBundle:Accueil:index.html.twig');
+                                    $session = $session = $request->getSession();
+                                    $session->set('name', $nom);
+                                    return self::listeFormationAction(1);
 				}
 				$request->getSession()->getFlashBag()->add('connection', 'Login ou mot de passe incorrects');
 			}
