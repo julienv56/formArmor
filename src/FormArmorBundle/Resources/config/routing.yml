@@ -25,8 +25,6 @@ form_armor_client_formation_inscrire:
     path:     /client/formation/inscrire/{id}
     defaults:
         _controller: FormArmorBundle:Client:inscrire
-        
-        
 
 form_armor_client_session:
     path:     /client/session/{page}

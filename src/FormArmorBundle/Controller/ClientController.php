@@ -1,7 +1,18 @@
 <?php
 
 namespace FormArmorBundle\Controller;
+use FormArmorBundle\Form\ClientType;
+use FormArmorBundle\Form\ClientCompletType;
+use FormArmorBundle\Form\StatutType;
+use FormArmorBundle\Form\FormationType;
+use FormArmorBundle\Form\SessionType;
+use FormArmorBundle\Form\PlanFormationType;
 
+use FormArmorBundle\Entity\Client;
+use FormArmorBundle\Entity\Formation;
+use FormArmorBundle\Entity\Session_formation;
+use FormArmorBundle\Entity\Plan_formation;
+use FormArmorBundle\Entity\Statut;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,7 +21,6 @@ class ClientController extends Controller
 {
     public function authentifAction(Request $request) // Affichage du formulaire d'authentification
     {
-        
 		// Création du formulaire
 		$client = new Client();
 		$form   = $this->get('form.factory')->create(ClientType::class, $client);
@@ -33,7 +43,7 @@ class ClientController extends Controller
 				$nbClient = $rep->verifMDP($nom, $mdp);
 				if ($nbClient > 0)
 				{
-					return $this->render('FormArmorBundle:Client:accueil.html.twig');
+					return $this->render('FormArmorBundle:Accueil:index.html.twig');
 				}
 				$request->getSession()->getFlashBag()->add('connection', 'Login ou mot de passe incorrects');
 			}
