@@ -31,12 +31,24 @@ class ClientController extends Controller
 				// Controle du nom et du mdp
 				$manager = $this->getDoctrine()->getManager();
 				$rep = $manager->getRepository('FormArmorBundle:Client');
-				$nbClient = $rep->verifMDP($nom, $mdp);
+				
+                                $nbClient = $rep->verifMDP($nom, $mdp);
+                                
 				if ($nbClient > 0)
 				{
                                     $session = $session = $request->getSession();
                                     $session->set('name', $nom);
-                                    return self::listeFormationAction(1);
+                                    
+                                    $leClient = $rep->getClient($nom);
+                                    
+                                    if($leClient[0]->getStatut()->getId() != 6)
+                                    {
+                                        return self::listeFormationAction(1);
+                                    }
+                                    else
+                                    {
+                                        return AdminController::listeStatutAction(1);
+                                    }
 				}
 				$request->getSession()->getFlashBag()->add('connection', 'Login ou mot de passe incorrects');
 			}

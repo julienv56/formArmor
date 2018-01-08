@@ -21,13 +21,13 @@ class Client
      */
     private $id;
 
-	/**
-	 * @ORM\ManyToOne (targetEntity="FormArmorBundle\Entity\Statut")
-	 * @ORM\JoinColumn(nullable=false)
-	 */
-	private $statut;
-	
-	/**
+    /**
+     * @ORM\ManyToOne (targetEntity="FormArmorBundle\Entity\Statut")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $statut;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=40)
