@@ -1,6 +1,7 @@
 form_armor_homepage:
     path:     /
     defaults: { _controller: FormArmorBundle:Accueil:index }
+    
 form_armor_formations:
     path:     /formations/{page}
     defaults:
@@ -12,6 +13,10 @@ form_armor_formations:
 form_armor_connexion:
     path:     /connexion
     defaults: { _controller: FormArmorBundle:Client:authentif }
+
+form_armor_deconnexion:
+    path:     /deconnexion
+    defaults: { _controller: FormArmorBundle:Client:deconnexion }
 
 form_armor_client_formation:
     path:     /client/formation/{page}

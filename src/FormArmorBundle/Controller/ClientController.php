@@ -46,6 +46,14 @@ class ClientController extends Controller
 		return $this->render('FormArmorBundle:Client:connection.html.twig', array('form' => $form->createView()));
     }
     
+    public function deconnexionAction(Request $request)
+    {
+                $session = $request->getSession();
+                $session->remove($session->get('name'));
+                
+		return $this->render('FormArmorBundle::layout.html.twig');
+    }
+    
     public function listeFormationAction($page)
 	{
 		if ($page < 1)
