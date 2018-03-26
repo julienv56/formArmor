@@ -16,7 +16,7 @@ class Session_formationRepository extends \Doctrine\ORM\EntityRepository
 {
 	public function listeSessions($page, $nbParPage) // Liste toutes les sessions avec pagination
 	{
-		$queryBuilder = $this->createQueryBuilder('s');
+		$queryBuilder = $this->createQueryBuilder('s')->orderBy('s.id', 'ASC');
 
 		// On n'ajoute pas de critère ou tri particulier ici car on veut tous les statuts, la construction
 		// de notre requête est donc finie

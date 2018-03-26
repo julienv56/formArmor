@@ -130,17 +130,18 @@ class ClientController extends Controller
         $clients = $this->getDoctrine()->getRepository(Client::class)
                         ->getClient($nomPrenom);
         $client = $clients[0];
-        $dateToday = Date
+        $dateToday = date("Y-m-d");
+        var_dump($dateToday);
 
-        $formation = new Inscription();
-        $formation->setClient($client);
-        $formation->setPrice(19.99);
-        $formation->setDescription('Ergonomic and stylish!');
-
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($product);
-
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
+//        $formation = new Inscription();
+//        $formation->setClient($client);
+//        $formation->setDateInscription($dateToday);
+//        $formation->setSessionFormation($idFormation);
+//
+//        // tell Doctrine you want to (eventually) save the Product (no queries yet)
+//        $entityManager->persist($product);
+//
+//        // actually executes the queries (i.e. the INSERT query)
+//        $entityManager->flush();
     }
 }

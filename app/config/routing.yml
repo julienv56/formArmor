@@ -1,4 +1,3 @@
 form_armor:
     resource: "@FormArmorBundle/Resources/config/routing.yml"
     prefix:   /formarmor
-
