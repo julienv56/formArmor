@@ -21,81 +21,83 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends Controller
 {	
-	// Gestion des statuts
-	public function listeStatutAction($page)
-	{
-		if ($page < 1)
-		{
-			throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-		}
+    // Gestion des statuts
+    public function listeStatutAction($page)
+    {
+        if ($page < 1)
+        {
+                throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
 
-		// On peut fixer le nombre de lignes avec la ligne suivante :
-		// $nbParPage = 4;
-		// Mais bien sûr il est préférable de définir un paramètre dans "app\config\parameters.yml", et d'y accéder comme ceci :
-		$nbParPage = $this->container->getParameter('nb_par_page');
-		
-		
-		// On récupère l'objet Paginator
-		$manager = $this->getDoctrine()->getManager();
-		$rep = $manager->getRepository('FormArmorBundle:Statut');
-		$lesStatuts = $rep->listeStatuts($page, $nbParPage);
-		
-		// On calcule le nombre total de pages grâce au count($lesStatuts) qui retourne le nombre total de statuts
-		$nbPages = ceil(count($lesStatuts) / $nbParPage);
-		
-		// Si la page n'existe pas, on retourne une erreur 404
-		if ($page > $nbPages)
-		{
-			throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-		}
-		
-		// On donne toutes les informations nécessaires à la vue
-		return $this->render('FormArmorBundle:Admin:statut.html.twig', array(
-		  'lesStatuts' => $lesStatuts,
-		  'nbPages'     => $nbPages,
-		  'page'        => $page,
-		));
-	}
-	public function modifStatutAction($id, Request $request) // Affichage du formulaire de modification d'un statut
+        // On peut fixer le nombre de lignes avec la ligne suivante :
+        // $nbParPage = 4;
+        // Mais bien sûr il est préférable de définir un paramètre dans "app\config\parameters.yml", et d'y accéder comme ceci :
+        $nbParPage = $this->container->getParameter('nb_par_page');
+
+
+        // On récupère l'objet Paginator
+        $manager = $this->getDoctrine()->getManager();
+        $rep = $manager->getRepository('FormArmorBundle:Statut');
+        $lesStatuts = $rep->listeStatuts($page, $nbParPage);
+
+        // On calcule le nombre total de pages grâce au count($lesStatuts) qui retourne le nombre total de statuts
+        $nbPages = ceil(count($lesStatuts) / $nbParPage);
+
+        // Si la page n'existe pas, on retourne une erreur 404
+        if ($page > $nbPages)
+        {
+                throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
+
+        // On donne toutes les informations nécessaires à la vue
+        return $this->render('FormArmorBundle:Admin:statut.html.twig', array(
+          'lesStatuts' => $lesStatuts,
+          'nbPages'     => $nbPages,
+          'page'        => $page,
+        ));
+    }
+
+    public function modifStatutAction($id, Request $request) // Affichage du formulaire de modification d'un statut
     {
         // Récupération du statut d'identifiant $id
-		$em = $this->getDoctrine()->getManager();
-		$rep = $em->getRepository('FormArmorBundle:Statut');
-		$statut = $rep->find($id);
-		
-		// Création du formulaire à partir du statut "récupéré"
-		$form   = $this->get('form.factory')->create(StatutType::class, $statut);
-		
-		// Mise à jour de la bdd si method POST ou affichage du formulaire dans le cas contraire
-		if ($request->getMethod() == 'POST')
-		{
-			$form->handleRequest($request); // permet de récupérer les valeurs des champs dans les inputs du formulaire.
-			if ($form->isValid())
-			{
-				// mise à jour de la bdd
-				$em->persist($statut);
-				$em->flush();
-				
-				// Réaffichage de la liste des statuts
-				$nbParPage = $this->container->getParameter('nb_par_page');
-				// On récupère l'objet Paginator
-				$lesStatuts = $rep->listeStatuts(1, $nbParPage);
-				
-				// On calcule le nombre total de pages grâce au count($lesStatuts) qui retourne le nombre total de statuts
-				$nbPages = ceil(count($lesStatuts) / $nbParPage);
-				
-				// On donne toutes les informations nécessaires à la vue
-				return $this->render('FormArmorBundle:Admin:statut.html.twig', array(
-				  'lesStatuts' => $lesStatuts,
-				  'nbPages'     => $nbPages,
-				  'page'        => 1,
-				));
-			}
-		}
-		// Si formulaire pas encore soumis ou pas valide (affichage du formulaire)
-		return $this->render('FormArmorBundle:Admin:formStatut.html.twig', array('form' => $form->createView(), 'action' => 'modification'));
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository('FormArmorBundle:Statut');
+        $statut = $rep->find($id);
+
+        // Création du formulaire à partir du statut "récupéré"
+        $form   = $this->get('form.factory')->create(StatutType::class, $statut);
+
+        // Mise à jour de la bdd si method POST ou affichage du formulaire dans le cas contraire
+        if ($request->getMethod() == 'POST')
+        {
+            $form->handleRequest($request); // permet de récupérer les valeurs des champs dans les inputs du formulaire.
+            if ($form->isValid())
+            {
+                    // mise à jour de la bdd
+                    $em->persist($statut);
+                    $em->flush();
+
+                    // Réaffichage de la liste des statuts
+                    $nbParPage = $this->container->getParameter('nb_par_page');
+                    // On récupère l'objet Paginator
+                    $lesStatuts = $rep->listeStatuts(1, $nbParPage);
+
+                    // On calcule le nombre total de pages grâce au count($lesStatuts) qui retourne le nombre total de statuts
+                    $nbPages = ceil(count($lesStatuts) / $nbParPage);
+
+                    // On donne toutes les informations nécessaires à la vue
+                    return $this->render('FormArmorBundle:Admin:statut.html.twig', array(
+                      'lesStatuts' => $lesStatuts,
+                      'nbPages'     => $nbPages,
+                      'page'        => 1,
+                    ));
+            }
+        }
+        // Si formulaire pas encore soumis ou pas valide (affichage du formulaire)
+        return $this->render('FormArmorBundle:Admin:formStatut.html.twig', array('form' => $form->createView(), 'action' => 'modification'));
     }
-	public function suppStatutAction($id, Request $request) // Affichage du formulaire de suppression d'un statut
+    
+    public function suppStatutAction($id, Request $request)// Affichage du formulaire de suppression d'un statut
     {
         // Récupération du statut d'identifiant $id
 		$em = $this->getDoctrine()->getManager();
