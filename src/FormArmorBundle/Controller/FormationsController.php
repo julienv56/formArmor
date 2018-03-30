@@ -37,8 +37,8 @@ class FormationsController extends Controller
 		// On donne toutes les informations nécessaires à la vue
 		return $this->render('FormArmorBundle:Formations:index.html.twig', array(
 		  'lesFormations' => $lesFormations,
-		  'nbPages'     => $nbPages,
-		  'page'        => $page,
+            'nbPages' => $nbPages,
+            'page' => $page,
 		));
 		
     }
