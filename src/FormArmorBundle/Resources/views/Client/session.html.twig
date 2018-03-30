@@ -21,7 +21,7 @@
 					<td>{{session.dateDebut|date('Y-m-d')}}</td>
 					<td>{{session.nbPlaces}}</td>
 					<td>{{session.nbInscrits}}</td>
-					{% if (session.close == 1) %}
+                    {% if (session.close == 1 or "now"|date('Y-m-d')  > session.dateDebut|date('Y-m-d')) %}
 						<td>Oui</td>
 					{% else %}
 						<td>Non</td>

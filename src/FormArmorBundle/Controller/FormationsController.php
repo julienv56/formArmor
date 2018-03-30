@@ -18,9 +18,8 @@ class FormationsController extends Controller
 		// $nbParPage = 4;
 		// Mais bien sûr il est préférable de définir un paramètre dans "app\config\parameters.yml", et d'y accéder comme ceci :
 		$nbParPage = $this->container->getParameter('nb_par_page');
-		
-		
-		// On récupère l'objet Paginator
+
+        // On récupère l'objet Paginator
 		$manager = $this->getDoctrine()->getManager();
 		$rep = $manager->getRepository('FormArmorBundle:Formation');
 		$lesFormations = $rep->listeFormations($page, $nbParPage);
