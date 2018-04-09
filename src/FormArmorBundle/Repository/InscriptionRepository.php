@@ -2,6 +2,10 @@
 
 namespace FormArmorBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * InscriptionRepository
  *
@@ -10,4 +14,5 @@ namespace FormArmorBundle\Repository;
  */
 class InscriptionRepository extends \Doctrine\ORM\EntityRepository
 {
+  
 }

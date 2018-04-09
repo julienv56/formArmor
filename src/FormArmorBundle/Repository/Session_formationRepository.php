@@ -46,4 +46,13 @@ class Session_formationRepository extends \Doctrine\ORM\EntityRepository
 		
 		return $qb->getQuery()->getResult();
 	}
+        public function getSession($idSession)
+        {
+            $qb = $this->createQueryBuilder('s');
+            $qb->select('s');
+            $qb->andWhere('s.id = :id')->setParameter('id', $idSession);
+
+            return $qb->getQuery()->getResult();
+        }
+        
 }

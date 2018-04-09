@@ -124,30 +124,30 @@ class ClientController extends Controller
         ));
     }
 
-    public function inscrireAction($idFormation, Request $request)
+    public function inscrireAction($idSession, Request $request)
     {   
         $nomPrenom = $request->getSession()->get('name');
-        
+        $manager = $this->getDoctrine()->getManager();
         $clients = $this->getDoctrine()->getRepository(Client::class)
                         ->getClient($nomPrenom);
         $client = $clients[0];
-        $dateToday = date("Y-m-d");
+        $dateToday = new \DateTime('now');
         var_dump($dateToday);
-
-        $formation = new Inscription();
-        $formation->setClient($client);
-        $formation->setDateInscription($dateToday);
+        var_dump($client->getId());
         
-        $sessionsFormation = $this->getDoctrine()->getRepository(Session_formation::class)
-                                  ->getSessionFormation($idFormation, $dateToday);
-        $sessionFormation = $sessionsFormations[0];
+        $session = $this->getDoctrine()->getRepository(Session_formation::class)
+                                       ->getSession($idSession);
+        $session = $sessions[0];
+        $session = new Inscription();
+        $session->setClient($client);    
+        $session->setSessionFormation(sessions);
+        $session->setDateInscription($dateToday);  
         
-        $formation->setSessionFormation($idFormation);
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($formation);
+        $manager->persist($session);
 
         // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
+        $manager->flush();
     }
 }

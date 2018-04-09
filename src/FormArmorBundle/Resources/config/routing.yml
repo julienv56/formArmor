@@ -26,8 +26,8 @@ form_armor_client_formation:
     requirements:
         page: \d*
 
-form_armor_client_formation_inscrire:
-    path:     /client/formation/inscrire/{idFormation}
+form_armor_client_session_inscrire:
+    path:     /client/session/inscrire/{idSession}
     defaults:
         _controller: FormArmorBundle:Client:inscrire
 
@@ -38,16 +38,11 @@ form_armor_client_session:
         page:     1
     requirements:
         page: \d*
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+        
+        
+
+
+
 form_armor_admin_statut:
     path:     /admin/statut/{page}
     defaults:
@@ -55,7 +50,7 @@ form_armor_admin_statut:
         page:     1
     requirements:
         page: \d*
-        
+
 form_armor_admin_statut_modif:
     path:     /admin/statut/modif/{id}
     defaults:
@@ -65,7 +60,7 @@ form_armor_admin_statut_supp:
     path:     /admin/statut/supp/{id}
     defaults:
         _controller: FormArmorBundle:Admin:suppStatut
-        
+ 
 form_armor_admin_client:
     path:     /admin/client/{page}
     defaults:
@@ -73,17 +68,17 @@ form_armor_admin_client:
         page:     1
     requirements:
         page: \d*
-        
+  
 form_armor_admin_client_modif:
     path:     /admin/client/modif/{id}
     defaults:
         _controller: FormArmorBundle:Admin:modifClient
-        
+
 form_armor_admin_client_supp:
-    path:     /admin/client/supp/{id}
+    path:    /admin/client/supp/{id}
     defaults:
         _controller: FormArmorBundle:Admin:suppClient
-        
+
 form_armor_admin_formation:
     path:     /admin/formation/{page}
     defaults:
