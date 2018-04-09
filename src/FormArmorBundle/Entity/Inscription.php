@@ -21,18 +21,18 @@ class Inscription
      */
     private $id;
 
-	 /**
-	 * @ORM\ManyToOne (targetEntity="FormArmorBundle\Entity\Client")
-	 * @ORM\JoinColumn(nullable=false)
-	 */
-	private $client;
-	
-	/**
-	 * @ORM\ManyToOne (targetEntity="FormArmorBundle\Entity\Session_formation")
-	 * @ORM\JoinColumn(nullable=false)
-	 */
-	private $session_formation;
-	
+    /**
+    * @ORM\ManyToOne (targetEntity="FormArmorBundle\Entity\Client")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $client;
+        
+    /**
+    * @ORM\ManyToOne (targetEntity="FormArmorBundle\Entity\Session_formation")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $session_formation;
+        
     /**
      * @var \DateTime
      *

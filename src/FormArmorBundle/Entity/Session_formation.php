@@ -26,13 +26,13 @@ class Session_formation
      *
      * @ORM\Column(name="date_debut", type="date")
      */
-	private $dateDebut;
+    private $dateDebut;
 
-	 /**
-	 * @ORM\ManyToOne (targetEntity="FormArmorBundle\Entity\Formation")
-	 * @ORM\JoinColumn(nullable=false)
-	 */
-	private $formation;
+    /**
+    * @ORM\ManyToOne (targetEntity="FormArmorBundle\Entity\Formation")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $formation;
 	
     /**
      * @var int

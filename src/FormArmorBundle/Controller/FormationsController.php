@@ -4,6 +4,7 @@ namespace FormArmorBundle\Controller;
 
 use FormArmorBundle\Entity\Formation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class FormationsController extends Controller
 {

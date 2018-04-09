@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FormArmorBundle\Form\ClientType;
 use FormArmorBundle\Entity\Client;
 use FormArmorBundle\Entity\Inscription;
+use FormArmorBundle\Entity\Session_formation;
 use Symfony\Component\HttpFoundation\Request;
 
 class ClientController extends Controller
@@ -132,22 +133,23 @@ class ClientController extends Controller
                         ->getClient($nomPrenom);
         $client = $clients[0];
         $dateToday = new \DateTime('now');
-        var_dump($dateToday);
-        var_dump($client->getId());
         
-        $session = $this->getDoctrine()->getRepository(Session_formation::class)
-                                       ->getSession($idSession);
+        $sessions = $this->getDoctrine()->getRepository(Session_formation::class)
+                                        ->getSession($idSession);
         $session = $sessions[0];
-        $session = new Inscription();
-        $session->setClient($client);    
-        $session->setSessionFormation(sessions);
-        $session->setDateInscription($dateToday);  
+        
+        $inscription= new Inscription();
+        $inscription->setClient($client);    
+        $inscription->setSessionFormation($session);
+        $inscription->setDateInscription($dateToday);  
         
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $manager->persist($session);
+        $manager->persist($inscription);
 
         // actually executes the queries (i.e. the INSERT query)
         $manager->flush();
+        
+        return self::listeSessionAction(1);
     }
 }

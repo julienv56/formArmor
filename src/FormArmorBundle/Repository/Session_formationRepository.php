@@ -5,6 +5,7 @@ namespace FormArmorBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Session_formationRepository
@@ -37,6 +38,7 @@ class Session_formationRepository extends \Doctrine\ORM\EntityRepository
 		// (=>Ne pas oublier le "use Doctrine\ORM\Tools\Pagination\Paginator;" correspondant en début de fichier)
 		return new Paginator($query, true);
 	}
+        
 	public function suppSession($id) // Suppression de la session d'identifiant $id
 	{
 		$qb = $this->createQueryBuilder('s');
@@ -46,6 +48,7 @@ class Session_formationRepository extends \Doctrine\ORM\EntityRepository
 		
 		return $qb->getQuery()->getResult();
 	}
+        
         public function getSession($idSession)
         {
             $qb = $this->createQueryBuilder('s');
