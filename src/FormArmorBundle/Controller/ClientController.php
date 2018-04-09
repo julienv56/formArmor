@@ -132,24 +132,37 @@ class ClientController extends Controller
         $clients = $this->getDoctrine()->getRepository(Client::class)
                         ->getClient($nomPrenom);
         $client = $clients[0];
-        $dateToday = new \DateTime('now');
         
-        $sessions = $this->getDoctrine()->getRepository(Session_formation::class)
-                                        ->getSession($idSession);
-        $session = $sessions[0];
+        if($client->getEmail() != "")
+        {
+           $dateToday = new \DateTime('now');
         
-        $inscription= new Inscription();
-        $inscription->setClient($client);    
-        $inscription->setSessionFormation($session);
-        $inscription->setDateInscription($dateToday);  
-        
+            $sessions = $this->getDoctrine()->getRepository(Session_formation::class)
+                                            ->getSession($idSession);
+            $session = $sessions[0];
 
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $manager->persist($inscription);
+            $inscription= new Inscription();
+            $inscription->setClient($client);    
+            $inscription->setSessionFormation($session);
+            $inscription->setDateInscription($dateToday);  
 
-        // actually executes the queries (i.e. the INSERT query)
-        $manager->flush();
+
+            // tell Doctrine you want to (eventually) save the Product (no queries yet)
+            $manager->persist($inscription);
+
+            // actually executes the queries (i.e. the INSERT query)
+            $manager->flush();
+
+            return self::listeSessionAction(1); 
+        }
+        else
+        {
+        ("Aucune adresse mail renseignée. Inscription impossible!");
+            return self::listeSessionAction(1);
+                    
+        }
         
-        return self::listeSessionAction(1);
     }
+    
+    
 }

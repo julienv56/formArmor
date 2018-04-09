@@ -4,30 +4,27 @@
 	<table class="table">
 		<thead>
 		<tr>
-			<th>Id</th>
 			<th>Formation</th>
-			<th>Date debut</th>
-			<th>Nombre de places</th>
-			<th>Nombre d'inscrits</th>
-			<th>Close</th>
+                        <th>Description</th>
+			<th>Date début</th>
 			
 		</tr>
 		</thead>
 		<tbody>
 			{% for session in lesSessions %}
 				<tr {# si le nombre de passages dans la boucle est pair #} {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
-					<td>{{session.id}}</td>
 					<td>{{session.formation.libelle}}-{{session.formation.niveau}}</td>
+                                        <td>{{session.formation.description}}-{{session.formation.description}}</td>
 					<td>{{session.dateDebut|date('Y-m-d')}}</td>
-					<td>{{session.nbPlaces}}</td>
-					<td>{{session.nbInscrits}}</td>
-                    {% if (session.close == 1 or "now"|date('Y-m-d')  > session.dateDebut|date('Y-m-d')) %}
-						<td>Oui</td>
-					{% else %}
-						<td>Non</td>
-					{% endif %}
-					
-                                        <td><a href="{{ path('form_armor_client_session_inscrire', {'idSession': session.id}) }}">Inscription</a></td>
+                                        {% if session.nbInscrits < session.nbPlaces %}
+                                        <td><a href="{{ path('form_armor_client_session_inscrire', {'idSession': session.id}) }}" data-target="#myModal">Inscription</a></td>
+                                        
+                                        {% elseif session.nbInscrits == session.nbplaces%}
+                                            <td><a>Plus de place disponible</a></td>
+                                        {% elseif session.id and session.formation.id %}
+                                            <td><a>Pré-inscrit</a></td>
+                                        {% endif%}            
+                                        
 				</tr>
 			{% endfor %}
 		</tbody>
