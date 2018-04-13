@@ -8,7 +8,7 @@
 			<th>Client</th>
 			<th>Formation</th>
 			<th>Effectué</th>
-			<th colspan="2">Option</th>
+            <th>Option</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -22,8 +22,10 @@
 					{% else %}
 						<td>Non</td>
 					{% endif %}
-					<td><a href="{{ path('form_armor_admin_planformation_modif', {'id': plan.id}) }}">Modifier</a></td>
-					<td><a href="{{ path('form_armor_admin_planformation_supp', {'id': plan.id}) }}">Supprimer</a></td>
+                    <td>
+                        <a href="{{ path('form_armor_admin_planformation_modif', {'id': plan.id}) }}">Modifier</a> /
+                        <a href="{{ path('form_armor_admin_planformation_supp', {'id': plan.id}) }}">Supprimer</a>
+                    </td>
 				</tr>
 			{% endfor %}
 		</tbody>

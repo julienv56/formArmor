@@ -4,7 +4,6 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Formation</th>
             <th>Date debut</th>
             <th>Nombre de places</th>
@@ -15,8 +14,7 @@
         </thead>
         <tbody>
         {% for session in lesSessions %}
-            <tr {# si le nombre de passages dans la boucle est pair #} {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
-                <td>{{ session.id }}</td>
+            <tr {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
                 <td>{{ session.formation.libelle }}-{{ session.formation.niveau }}</td>
                 <td>{{ session.dateDebut|date('Y-m-d') }}</td>
                 <td>{{ session.nbPlaces }}</td>
@@ -26,8 +24,10 @@
                 {% else %}
                     <td>Non</td>
                 {% endif %}
-                <td><a href="{{ path('form_armor_admin_session_modif', {'id': session.id}) }}">Modifier</a></td>
-                <td><a href="{{ path('form_armor_admin_session_supp', {'id': session.id}) }}">Supprimer</a></td>
+                <td>
+                    <a href="{{ path('form_armor_admin_session_modif', {'id': session.id}) }}">Modifier</a> /
+                    <a href="{{ path('form_armor_admin_session_supp', {'id': session.id}) }}">Supprimer</a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
