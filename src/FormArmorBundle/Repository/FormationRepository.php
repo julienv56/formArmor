@@ -55,4 +55,13 @@ class FormationRepository extends \Doctrine\ORM\EntityRepository
 		
 		return $qb->getQuery()->getResult();
 	}
+        
+        public function getFormation($idFormation)
+        {
+             $qb = $this->createQueryBuilder('f');
+            $qb->select('f');
+            $qb->andWhere('f.id = :id')->setParameter('id', $idFormation);
+
+            return $qb->getQuery()->getResult();
+        }
 }

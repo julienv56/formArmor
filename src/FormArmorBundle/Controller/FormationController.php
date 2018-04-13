@@ -6,7 +6,7 @@ use FormArmorBundle\Entity\Formation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class FormationsController extends Controller
+class FormationController extends Controller
 {
     public function listeAction($page)
     {
@@ -35,7 +35,7 @@ class FormationsController extends Controller
 		}
 		
 		// On donne toutes les informations nécessaires à la vue
-		return $this->render('FormArmorBundle:Formations:index.html.twig', array(
+		return $this->render('FormArmorBundle:Formation:index.html.twig', array(
 		  'lesFormations' => $lesFormations,
             'nbPages' => $nbPages,
             'page' => $page,

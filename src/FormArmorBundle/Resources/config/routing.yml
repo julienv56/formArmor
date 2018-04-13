@@ -5,7 +5,7 @@ form_armor_homepage:
 form_armor_formations:
     path:     /formations/{page}
     defaults:
-        _controller: FormArmorBundle:Formations:liste
+        _controller: FormArmorBundle:Formation:liste
         page:     1
     requirements:
         page: \d*
