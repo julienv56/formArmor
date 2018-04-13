@@ -29,11 +29,11 @@ class Session_formation
     private $dateDebut;
 
     /**
-    * @ORM\ManyToOne (targetEntity="FormArmorBundle\Entity\Formation")
-    * @ORM\JoinColumn(nullable=false)
-    */
+     * @ORM\ManyToOne (targetEntity="FormArmorBundle\Entity\Formation")
+     * @ORM\JoinColumn(nullable=false)
+     */
     private $formation;
-	
+
     /**
      * @var int
      *
@@ -76,7 +76,6 @@ class Session_formation
     public function setNbPlaces($nbPlaces)
     {
         $this->nbPlaces = $nbPlaces;
-
         return $this;
     }
 
@@ -100,7 +99,6 @@ class Session_formation
     public function setNbInscrits($nbInscrits)
     {
         $this->nbInscrits = $nbInscrits;
-
         return $this;
     }
 
@@ -124,7 +122,6 @@ class Session_formation
     public function setClose($close)
     {
         $this->close = $close;
-
         return $this;
     }
 
@@ -148,7 +145,6 @@ class Session_formation
     public function setFormation(\FormArmorBundle\Entity\Formation $formation)
     {
         $this->formation = $formation;
-
         return $this;
     }
 
@@ -172,7 +168,6 @@ class Session_formation
     public function setDateDebut($dateDebut)
     {
         $this->dateDebut = $dateDebut;
-
         return $this;
     }
 

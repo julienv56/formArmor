@@ -1,9 +1,6 @@
 <?php
 
 namespace FormArmorBundle\Repository;
-
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -21,15 +18,15 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
 		$qb->andWhere('c.nom = :nom AND c.password = :mdp')->setParameter('nom', $nom)->setParameter('mdp',   $mdp);
 		return $qb->getQuery()->getSingleScalarResult();
 	}
-        
-        public function getClient($nom)
-        {
-            $qb = $this->createQueryBuilder('c');
-            $qb->select('c');
-            $qb->andWhere('c.nom = :nom')->setParameter('nom', $nom);
 
-            return $qb->getQuery()->getResult();
-        }
+    public function getClient($nom)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->select('c');
+        $qb->andWhere('c.nom = :nom')->setParameter('nom', $nom);
+
+        return $qb->getQuery()->getResult();
+    }
         
 	public function listeClients($page, $nbParPage) // Liste tous les clients avec pagination
 	{

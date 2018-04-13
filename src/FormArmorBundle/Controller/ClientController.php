@@ -150,17 +150,15 @@ class ClientController extends Controller
         
         if($client->getEmail() != "")
         {
-           // $sessions = $this->getDoctrine()->getRepository(Session_formation::class)
-                                                ->getSession($idSession);
-           // $session = $sessions[0];
-            //$idFormation->getFormation();
-            
-            $manager = $this->getDoctrine()->getManager();
-            $rep = $manager->getRepository('FormArmorBundle:Formation');
-            $formation = $rep->getFormation();
-            
+            $sessions = $this->getDoctrine()->getRepository(Session_formation::class)->getSession($idSession);
+            $session = $sessions[0];
+            $idFormation = $session->getFormation()->getId();
+
+            $formations = $this->getDoctrine()->getRepository(Formation::class)->getFormation($idFormation);
             $formation = $formations[0];
-            
+
+            var_dump($formation);
+
             if($formation->getTypeForm() == "Bureautique")
             {
                 //Verifier si l'utilisateur a assez d'heures pour faire la formation
