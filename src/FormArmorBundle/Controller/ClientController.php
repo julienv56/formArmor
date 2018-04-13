@@ -8,6 +8,7 @@ use FormArmorBundle\Entity\Client;
 use FormArmorBundle\Entity\Inscription;
 use FormArmorBundle\Entity\Session_formation;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ClientController extends Controller
 {
@@ -119,14 +120,28 @@ class ClientController extends Controller
 
         // On donne toutes les informations nécessaires à la vue
         return $this->render('FormArmorBundle:Client:session.html.twig', array(
+            'textePop'=> 'vide',
             'lesSessions' => $lesSessions,
             'nbPages' => $nbPages,
             'page' => $page,
         ));
+        
     }
 
+    
+    
     public function inscrireAction($idSession, Request $request)
     {   
+        
+        $nbParPage = $this->container->getParameter('nb_par_page');
+
+        // On récupère l'objet Paginator
+        $manager = $this->getDoctrine()->getManager();
+        $rep = $manager->getRepository('FormArmorBundle:Session_formation');
+        $lesSessions = $rep->listeSessions(1, $nbParPage);
+
+        // On calcule le nombre total de pages grâce au count($lesSessions) qui retourne le nombre total de sessions
+        $nbPages = ceil(count($lesSessions) / $nbParPage);
         $nomPrenom = $request->getSession()->get('name');
         $manager = $this->getDoctrine()->getManager();
         $clients = $this->getDoctrine()->getRepository(Client::class)
@@ -135,33 +150,57 @@ class ClientController extends Controller
         
         if($client->getEmail() != "")
         {
-           $dateToday = new \DateTime('now');
-        
-            $sessions = $this->getDoctrine()->getRepository(Session_formation::class)
-                                            ->getSession($idSession);
-            $session = $sessions[0];
+           // $sessions = $this->getDoctrine()->getRepository(Session_formation::class)
+                                                ->getSession($idSession);
+           // $session = $sessions[0];
+            //$idFormation->getFormation();
+            
+            $manager = $this->getDoctrine()->getManager();
+            $rep = $manager->getRepository('FormArmorBundle:Formation');
+            $formation = $rep->getFormation();
+            
+            $formation = $formations[0];
+            
+            if($formation->getTypeForm() == "Bureautique")
+            {
+                //Verifier si l'utilisateur a assez d'heures pour faire la formation
+                if ($client->getNbhbur() > $formation->getDuree())
+                {
+                
+                }
+            }
+            
+                $dateToday = new \DateTime('now');
 
-            $inscription= new Inscription();
-            $inscription->setClient($client);    
-            $inscription->setSessionFormation($session);
-            $inscription->setDateInscription($dateToday);  
+                $sessions = $this->getDoctrine()->getRepository(Session_formation::class)
+                                                ->getSession($idSession);
+                $session = $sessions[0];
 
+                $inscription= new Inscription();
+                $inscription->setClient($client);    
+                $inscription->setSessionFormation($session);
+                $inscription->setDateInscription($dateToday);  
+                // tell Doctrine you want to (eventually) save the Product (no queries yet)
+                $manager->persist($inscription);
+                // actually executes the queries (i.e. the INSERT query)
+                $manager->flush();
 
-            // tell Doctrine you want to (eventually) save the Product (no queries yet)
-            $manager->persist($inscription);
-
-            // actually executes the queries (i.e. the INSERT query)
-            $manager->flush();
-
-            return self::listeSessionAction(1); 
-        }
-        else
-        {
-        ("Aucune adresse mail renseignée. Inscription impossible!");
-            return self::listeSessionAction(1);
-                    
-        }
-        
+                $message = "Vous êtes bien pré-inscrit";
+                return $this->render('FormArmorBundle:Client:session.html.twig', array(
+                                                                            'textePop' => $message, 
+                                                                            'lesSessions' => $lesSessions,
+                                                                            'nbPages' => $nbPages,
+                                                                            'page' => 1,));
+            }
+            else
+            {
+                $message = "Aucune adresse mail renseignée. Inscription impossible.";
+                return $this->render('FormArmorBundle:Client:session.html.twig', array(
+                                                                            'textePop' => $message, 
+                                                                            'lesSessions' => $lesSessions,
+                                                                            'nbPages' => $nbPages,
+                                                                            'page' => 1,));
+            }
     }
     
     
