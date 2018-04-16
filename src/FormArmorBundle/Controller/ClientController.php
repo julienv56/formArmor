@@ -154,21 +154,18 @@ class ClientController extends Controller
             $session = $sessions[0];
             $idFormation = $session->getFormation()->getId();
 
-            $formations = $this->getDoctrine()->getRepository(Formation::class)->getFormation($idFormation);
+            $formations = $this->getDoctrine()->getRepository('FormArmorBundle:Formation')->getFormation($idFormation);
             $formation = $formations[0];
 
-            var_dump($formation);
+            var_dump($formation->getDuree());
+            var_dump($client->getNbhbur());
 
             if($formation->getTypeForm() == "Bureautique")
             {
                 //Verifier si l'utilisateur a assez d'heures pour faire la formation
                 if ($client->getNbhbur() > $formation->getDuree())
                 {
-                
-                }
-            }
-            
-                $dateToday = new \DateTime('now');
+                    $dateToday = new \DateTime('now');
 
                 $sessions = $this->getDoctrine()->getRepository(Session_formation::class)
                                                 ->getSession($idSession);
@@ -189,16 +186,56 @@ class ClientController extends Controller
                                                                             'lesSessions' => $lesSessions,
                                                                             'nbPages' => $nbPages,
                                                                             'page' => 1,));
+                }
+                else
+                {
+                    $message = "Il ne vous reste pas assez d'heure de Bureautique pour cette formation.";
+                    return $this->render('FormArmorBundle:Client:session.html.twig', array(
+                                                                                'textePop' => $message, 
+                                                                                'lesSessions' => $lesSessions,
+                                                                                'nbPages' => $nbPages,
+                                                                                'page' => 1,));
+                }
             }
             else
             {
-                $message = "Aucune adresse mail renseignée. Inscription impossible.";
-                return $this->render('FormArmorBundle:Client:session.html.twig', array(
-                                                                            'textePop' => $message, 
-                                                                            'lesSessions' => $lesSessions,
-                                                                            'nbPages' => $nbPages,
-                                                                            'page' => 1,));
+                if ($client->getNbhcpta() > $formation->getDuree())
+                {
+                    $dateToday = new \DateTime('now');
+
+                    $sessions = $this->getDoctrine()->getRepository(Session_formation::class)
+                                                    ->getSession($idSession);
+                    $session = $sessions[0];
+
+                    $inscription= new Inscription();
+                    $inscription->setClient($client);    
+                    $inscription->setSessionFormation($session);
+                    $inscription->setDateInscription($dateToday);  
+                    // tell Doctrine you want to (eventually) save the Product (no queries yet)
+                    $manager->persist($inscription);
+                    // actually executes the queries (i.e. the INSERT query)
+                    $manager->flush();
+
+                    $message = "Vous êtes bien pré-inscrit";
+                    return $this->render('FormArmorBundle:Client:session.html.twig', array(
+                                                                                'textePop' => $message, 
+                                                                                'lesSessions' => $lesSessions,
+                                                                                'nbPages' => $nbPages,
+                                                                                'page' => 1,));
+                }
+                else
+                {
+                    $message = "Il ne vous reste pas assez d'heure de Comptabilité pour cette formation.";
+                    return $this->render('FormArmorBundle:Client:session.html.twig', array(
+                                                                                'textePop' => $message, 
+                                                                                'lesSessions' => $lesSessions,
+                                                                                'nbPages' => $nbPages,
+                                                                                'page' => 1,));
+                }
             }
+        }
+            
+                
     }
     
     
