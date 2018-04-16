@@ -14,5 +14,14 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class InscriptionRepository extends \Doctrine\ORM\EntityRepository
 {
-  
+    public function getInscriptions($idSession) // Liste toutes les sessions avec pagination
+    {
+        $queryBuilder = $this->createQueryBuilder('i')
+            ->andWhere('i.session_formation = :idSession')
+            ->setParameter('idSession', $idSession)
+            ->orderBy('i.id', 'ASC');
+
+        $query = $queryBuilder->getQuery();
+        return $query->getResult();
+    }
 }

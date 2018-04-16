@@ -8,7 +8,6 @@ use FormArmorBundle\Entity\Client;
 use FormArmorBundle\Entity\Inscription;
 use FormArmorBundle\Entity\Session_formation;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class ClientController extends Controller
 {
@@ -125,7 +124,6 @@ class ClientController extends Controller
             'nbPages' => $nbPages,
             'page' => $page,
         ));
-        
     }
 
     

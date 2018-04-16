@@ -374,36 +374,33 @@ class AdminController extends Controller
 	// Gestion des sessions
 	public function listeSessionAction($page)
 	{
-		if ($page < 1)
-		{
-			throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-		}
+        if ($page < 1) {
+            throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
+        }
+        // Mais bien sûr il est préférable de définir un paramètre dans "app\config\parameters.yml", et d'y accéder comme ceci :
+        $nbParPage = $this->container->getParameter('nb_par_page');
 
-		// On peut fixer le nombre de lignes avec la ligne suivante :
-		// $nbParPage = 4;
-		// Mais bien sûr il est préférable de définir un paramètre dans "app\config\parameters.yml", et d'y accéder comme ceci :
-		$nbParPage = $this->container->getParameter('nb_par_page');
-		
-		// On récupère l'objet Paginator
-		$manager = $this->getDoctrine()->getManager();
-		$rep = $manager->getRepository('FormArmorBundle:Session_formation');
-		$lesSessions = $rep->listeSessions($page, $nbParPage);
-		
-		// On calcule le nombre total de pages grâce au count($lesSessions) qui retourne le nombre total de sessions
-		$nbPages = ceil(count($lesSessions) / $nbParPage);
-		
-		// Si la page n'existe pas, on retourne une erreur 404
-		if ($page > $nbPages)
-		{
-			throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-		}
-		
-		// On donne toutes les informations nécessaires à la vue
-		return $this->render('FormArmorBundle:Admin:session.html.twig', array(
-		  'lesSessions' => $lesSessions,
-		  'nbPages'     => $nbPages,
-		  'page'        => $page,
-		));
+        // On récupère l'objet Paginator
+        $manager = $this->getDoctrine()->getManager();
+        $rep = $manager->getRepository('FormArmorBundle:Session_formation');
+        $lesSessions1 = $rep->listeSessionsAdmin1($page, $nbParPage);
+        $lesSessions2 = $rep->listeSessionsAdmin2($page, $nbParPage);
+
+        $nbPages = ceil((count($lesSessions1) + count($lesSessions2)) / $nbParPage);
+
+        // Si la page n'existe pas, on retourne une erreur 404
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
+        }
+
+        // On donne toutes les informations nécessaires à la vue
+        return $this->render('FormArmorBundle:Admin:session.html.twig', array(
+            'textePop' => 'vide',
+            'lesSessions1' => $lesSessions1,
+            'lesSessions2' => $lesSessions2,
+            'nbPages' => $nbPages,
+            'page' => $page,
+        ));
 	}
 	public function modifSessionAction($id, Request $request) // Affichage du formulaire de modification d'une session
     {
@@ -444,6 +441,19 @@ class AdminController extends Controller
 		// Si formulaire pas encore soumis ou pas valide (affichage du formulaire)
 		return $this->render('FormArmorBundle:Admin:formSession.html.twig', array('form' => $form->createView(), 'action' => 'modification'));
     }
+
+    public function affichSessionAction($idSession, Request $request) // Affichage des inscription d'une session
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $rep = $manager->getRepository('FormArmorBundle:Inscription');
+        $lesInscriptions = $rep->getInscriptions($idSession);
+
+        return $this->render('FormArmorBundle:Admin:affichSession.html.twig', array(
+            'idSession' => $idSession,
+            'lesInscriptions' => $lesInscriptions,
+        ));
+    }
+
 	public function suppSessionAction($id, Request $request) // Affichage du formulaire de suppression d'une session
     {
         // Récupération de la session d'identifiant $id

@@ -1,0 +1,25 @@
+{% extends "FormArmorBundle:Admin:admin_layout.html.twig" %}
+{% block FormArmor_body %}
+    <h2>AFFICHAGE DE LA SESSION N°{{ idSession }}</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Matricule</th>
+            <th>Nom</th>
+            <th>Statut</th>
+            <th>Inscrit le</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for inscription in lesInscriptions %}
+
+            <tr {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
+                <td>{{ inscription.client.id }}</td>
+                <td>{{ inscription.client.nom }}</td>
+                <td>{{ inscription.client.statut.type }}</td>
+                <td>{{ inscription.dateInscription|date('Y-m-d') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

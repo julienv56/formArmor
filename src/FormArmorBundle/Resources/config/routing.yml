@@ -104,7 +104,11 @@ form_armor_admin_session:
         page:     1
     requirements:
         page: \d*
-        
+
+form_armor_admin_session_affich:
+    path:     /admin/session/affich/{idSession}
+    defaults:
+            _controller: FormArmorBundle:Admin:affichSession
 form_armor_admin_session_modif:
     path:     /admin/session/modif/{id}
     defaults:

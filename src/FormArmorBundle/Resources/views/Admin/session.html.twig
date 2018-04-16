@@ -5,29 +5,38 @@
         <thead>
         <tr>
             <th>Formation</th>
-            <th>Date debut</th>
+            <th>Description</th>
             <th>Nombre de places</th>
             <th>Nombre d'inscrits</th>
-            <th>Close</th>
-            <th colspan="2">Option</th>
+            <th>Date début</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-        {% for session in lesSessions %}
-            <tr {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
-                <td>{{ session.formation.libelle }}-{{ session.formation.niveau }}</td>
-                <td>{{ session.dateDebut|date('Y-m-d') }}</td>
+        {% for session in lesSessions1 %}
+
+            <tr class="danger">
+                <td>
+                    <a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">{{ session.formation.libelle }}
+                        -{{ session.formation.niveau }}</a></td>
+                <td>{{ session.formation.description }}-{{ session.formation.description }}</td>
                 <td>{{ session.nbPlaces }}</td>
                 <td>{{ session.nbInscrits }}</td>
-                {% if (session.close == 1) %}
-                    <td>Oui</td>
-                {% else %}
-                    <td>Non</td>
-                {% endif %}
+                <td>{{ session.dateDebut|date('Y-m-d') }}</td>
+                <td><a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">Ouvrir</a></td>
+            </tr>
+        {% endfor %}
+
+        {% for session in lesSessions2 %}
+            <tr {# si le nombre de passages dans la boucle est pair #} {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
                 <td>
-                    <a href="{{ path('form_armor_admin_session_modif', {'id': session.id}) }}">Modifier</a> /
-                    <a href="{{ path('form_armor_admin_session_supp', {'id': session.id}) }}">Supprimer</a>
-                </td>
+                    <a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">{{ session.formation.libelle }}
+                        -{{ session.formation.niveau }}</a></td>
+                <td>{{ session.formation.description }}-{{ session.formation.description }}</td>
+                <td>{{ session.nbPlaces }}</td>
+                <td>{{ session.nbInscrits }}</td>
+                <td>{{ session.dateDebut|date('Y-m-d') }}</td>
+                <td><a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">Ouvrir</a></td>
             </tr>
         {% endfor %}
         </tbody>
@@ -37,15 +46,19 @@
         {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
         {% for p in range(1, nbPages) %}
             <li{% if p == page %} class="active"{% endif %}>
-                <a href="{{ path('form_armor_admin_session', {'page': p}) }}">{{ p }}</a>
+                <a href="{{ path('form_armor_client_session', {'page': p}) }}">{{ p }}</a>
             </li>
         {% endfor %}
     </ul>
-
+    {% embed "FormArmorBundle::modal.html.twig" %}
+    {% endembed %}
     <script>
         $(function () {
             $('#menu4').attr('class', 'active');
+
+            {% if textePop != "vide" %}
+            $('#memberModal').modal('show');
+            {% endif %}
         });
     </script>
-
 {% endblock %}
