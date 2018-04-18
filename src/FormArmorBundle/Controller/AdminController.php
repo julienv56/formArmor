@@ -2,21 +2,12 @@
 
 namespace FormArmorBundle\Controller;
 
-use FormArmorBundle\Form\ClientType;
 use FormArmorBundle\Form\ClientCompletType;
 use FormArmorBundle\Form\StatutType;
 use FormArmorBundle\Form\FormationType;
 use FormArmorBundle\Form\SessionType;
 use FormArmorBundle\Form\PlanFormationType;
-
-use FormArmorBundle\Entity\Client;
-use FormArmorBundle\Entity\Formation;
-use FormArmorBundle\Entity\Session_formation;
-use FormArmorBundle\Entity\Plan_formation;
-use FormArmorBundle\Entity\Statut;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends Controller
