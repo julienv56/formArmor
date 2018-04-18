@@ -5,7 +5,7 @@ namespace FormArmorBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * plan_formation
+ * Plan_formation
  *
  * @ORM\Table(name="plan_formation")
  * @ORM\Entity(repositoryClass="FormArmorBundle\Repository\Plan_formationRepository")
