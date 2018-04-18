@@ -4,7 +4,8 @@
     <list default="true" id="5ee8f572-f4bc-42db-a3c5-35603e16b570" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/FormArmorBundle/Controller/AdminController.php" afterPath="$PROJECT_DIR$/src/FormArmorBundle/Controller/AdminController.php" />
-      <change beforePath="$PROJECT_DIR$/src/FormArmorBundle/Repository/InscriptionRepository.php" afterPath="$PROJECT_DIR$/src/FormArmorBundle/Repository/InscriptionRepository.php" />
+      <change beforePath="$PROJECT_DIR$/src/FormArmorBundle/Repository/Session_formationRepository.php" afterPath="$PROJECT_DIR$/src/FormArmorBundle/Repository/Session_formationRepository.php" />
+      <change beforePath="$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/session.html.twig" afterPath="$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/session.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,21 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ClientController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Controller/ClientController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="49" column="9" lean-forward="false" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Controller/AdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="441" column="40" lean-forward="true" selection-start-line="441" selection-start-column="40" selection-end-line="441" selection-end-column="40" />
+            <state relative-caret-position="672">
+              <caret line="439" column="61" lean-forward="false" selection-start-line="439" selection-start-column="61" selection-end-line="439" selection-end-column="61" />
               <folding>
                 <element signature="e#46#89#0#PHP" expanded="true" />
               </folding>
@@ -40,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InscriptionRepository.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="InscriptionRepository.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Repository/InscriptionRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+            <state relative-caret-position="616">
+              <caret line="23" column="5" lean-forward="false" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -53,30 +44,18 @@
       <file leaf-file-name="Plan_formationRepository.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Repository/Plan_formationRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
+            <state relative-caret-position="-512">
               <caret line="9" column="2" lean-forward="false" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
-              <folding>
-                <element signature="e#46#80#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Plan_formation.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Entity/Plan_formation.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="4" column="32" lean-forward="false" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FormationController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Controller/FormationController.php">
+      <file leaf-file-name="Session_formationRepository.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Repository/Session_formationRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+            <state relative-caret-position="200">
+              <caret line="87" column="68" lean-forward="true" selection-start-line="87" selection-start-column="68" selection-end-line="87" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -92,18 +71,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Inscription.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Entity/Inscription.php">
+      <file leaf-file-name="session.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/session.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="328">
+              <caret line="50" column="20" lean-forward="false" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Formation.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Entity/Formation.php">
+      <file leaf-file-name="Inscription.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Entity/Inscription.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -149,17 +128,17 @@
         <option value="$PROJECT_DIR$/src/FormArmorBundle/Repository/ClientRepository.php" />
         <option value="$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Client/session.html.twig" />
         <option value="$PROJECT_DIR$/src/FormArmorBundle/Controller/ClientController.php" />
-        <option value="$PROJECT_DIR$/src/FormArmorBundle/Repository/Session_formationRepository.php" />
         <option value="$PROJECT_DIR$/src/FormArmorBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/formSession.html.twig" />
-        <option value="$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/session.html.twig" />
         <option value="$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/affichFormation.html.twig" />
         <option value="$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/affichSession.html.twig" />
         <option value="$PROJECT_DIR$/src/FormArmorBundle/Repository/plan_formationRepository.php" />
         <option value="$PROJECT_DIR$/src/FormArmorBundle/Repository/Plan_formationRepository.php" />
         <option value="$PROJECT_DIR$/src/FormArmorBundle/Entity/Plan_formation.php" />
-        <option value="$PROJECT_DIR$/src/FormArmorBundle/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/src/FormArmorBundle/Repository/InscriptionRepository.php" />
+        <option value="$PROJECT_DIR$/src/FormArmorBundle/Repository/Session_formationRepository.php" />
+        <option value="$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/session.html.twig" />
+        <option value="$PROJECT_DIR$/src/FormArmorBundle/Controller/AdminController.php" />
       </list>
     </option>
   </component>
@@ -213,7 +192,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
+    <option name="x" value="837" />
+    <option name="y" value="-12" />
     <option name="width" value="975" />
     <option name="height" value="1047" />
   </component>
@@ -390,7 +370,7 @@
       <workItem from="1523858457006" duration="1657000" />
       <workItem from="1523860546761" duration="26000" />
       <workItem from="1523860598629" duration="16782000" />
-      <workItem from="1524033214473" duration="3479000" />
+      <workItem from="1524033214473" duration="7937000" />
     </task>
     <task id="LOCAL-00001" summary="Test Commit PhpStorm">
       <created>1522312933279</created>
@@ -455,11 +435,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524034864348</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Developpement Cote Admin, sessions et inscriptions">
+      <created>1524036901997</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1524036901997</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55410000" />
+    <option name="totallyTimeSpent" value="59868000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -733,28 +720,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Repository/Session_formationRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1352">
-          <caret line="45" column="47" lean-forward="true" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
-          <folding>
-            <element signature="e#46#80#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Entity/Statut.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="28" column="18" lean-forward="false" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/session.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="5" column="12" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -774,14 +744,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Controller/ClientController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="49" column="9" lean-forward="false" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/var/bootstrap.php.cache">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -789,28 +751,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Repository/Plan_formationRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="9" column="2" lean-forward="false" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
-          <folding>
-            <element signature="e#46#80#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/insertionFormArmor.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="48" column="13" lean-forward="false" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/affichSession.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -863,10 +807,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Controller/ClientController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1344">
+          <caret line="49" column="9" lean-forward="false" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/affichSession.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/session.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="50" column="20" lean-forward="false" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Controller/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="441" column="40" lean-forward="true" selection-start-line="441" selection-start-column="40" selection-end-line="441" selection-end-column="40" />
+        <state relative-caret-position="672">
+          <caret line="439" column="61" lean-forward="false" selection-start-line="439" selection-start-column="61" selection-end-line="439" selection-end-column="61" />
           <folding>
             <element signature="e#46#89#0#PHP" expanded="true" />
           </folding>
@@ -875,8 +843,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Repository/InscriptionRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+        <state relative-caret-position="616">
+          <caret line="23" column="5" lean-forward="false" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Repository/Plan_formationRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-512">
+          <caret line="9" column="2" lean-forward="false" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Repository/Session_formationRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="87" column="68" lean-forward="true" selection-start-line="87" selection-start-column="68" selection-end-line="87" selection-end-column="68" />
           <folding />
         </state>
       </provider>

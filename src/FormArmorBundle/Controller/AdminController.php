@@ -439,10 +439,6 @@ class AdminController extends Controller
         $rep = $manager->getRepository('FormArmorBundle:Inscription');
         $lesInscriptions = $rep->getInscriptions($idSession);
 
-        if ($lesInscriptions->count()) {
-            throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
-        }
-
         return $this->render('FormArmorBundle:Admin:affichSession.html.twig', array(
             'idSession' => $idSession,
             'lesInscriptions' => $lesInscriptions,

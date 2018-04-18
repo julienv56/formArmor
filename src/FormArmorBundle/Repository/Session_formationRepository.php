@@ -16,7 +16,7 @@ class Session_formationRepository extends EntityRepository
     public function listeSessionsAdmin1($page, $nbParPage) // Liste toutes les sessions avec pagination
     {
         $DateToday = new \DateTime('now');
-        $DateToday->format('Y-m-d');
+        $DateToday->modify('-1 day')->format('Y-m-d');
         $Date2 = new \DateTime('now');
         $Date2->modify('+8 day')->format('Y-m-d');
 
