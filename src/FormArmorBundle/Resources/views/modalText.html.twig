@@ -1,0 +1,17 @@
+<div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="memberModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="motif">Motif de l'annulation:</label>
+                        <input type="text" id="motif" class="form-control" placeholder="Entrez le motif">
+                    </div>
+                    <a href="{{ path('form_armor_admin_annuler_session', {'idSession': idSession}) }}"
+                       class="btn btn-primary active">Fermer</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

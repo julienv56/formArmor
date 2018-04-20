@@ -1,25 +1,45 @@
 {% extends "FormArmorBundle:Admin:admin_layout.html.twig" %}
 {% block FormArmor_body %}
     <h2>AFFICHAGE DE LA SESSION N°{{ idSession }}</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Matricule</th>
-            <th>Nom</th>
-            <th>Statut</th>
-            <th>Inscrit le</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for inscription in lesInscriptions %}
-
-            <tr {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
-                <td>{{ inscription.client.id }}</td>
-                <td>{{ inscription.client.nom }}</td>
-                <td>{{ inscription.client.statut.type }}</td>
-                <td>{{ inscription.dateInscription|date('Y-m-d') }}</td>
+    {% if lesInscriptions is not empty %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Statut</th>
+                <th>Inscrit le</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% set total = 0 %}
+            {% for inscription in lesInscriptions %}
+                {% set total = total + inscription.client.statut.tauxHoraire %}
+                <tr {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
+                    <td>{{ inscription.client.id }}</td>
+                    <td>{{ inscription.client.nom }}</td>
+                    <td>{{ inscription.client.statut.type }}</td>
+                    <td>{{ inscription.dateInscription|date('Y-m-d') }}</td>
+                </tr>
+            {% endfor %}
+            {% set total = total - lesInscriptions[0].sessionformation.formation.coutrevient %}
+            </tbody>
+        </table>
+        <h2 {% if total < 0 %} style="color:Red;" {% else %} style="color:Green;" {% endif %}>Total revient
+            : {{ total }} €</h2>
+        <a class="btn btn-info" href="{{ path('form_armor_admin_valider_session', {'idSession': idSession}) }}"
+           role="button">Valider</a>
+        <a id='annuler' class="btn btn-danger" role="button">Annuler</a>
+    {% else %}
+        <h3>Cette session ne comporte aucun inscrit</h3>
+    {% endif %}
+
+    {% embed "FormArmorBundle::modalText.html.twig" %}
+    {% endembed %}
+
+    <script>
+        $('#annuler').click(function () {
+            $('#memberModal').modal('show');
+        });
+    </script>
 {% endblock %}

@@ -88,8 +88,8 @@ class Session_formationRepository extends EntityRepository
         $qb->delete('FormArmorBundle\Entity\Session_formation', 's')
             ->where('s.id = :id')
             ->setParameter('id', $id);
-		
-		return $qb->getQuery()->getResult();
+
+        return $qb->getQuery()->getResult();
 	}
 
     public function getSession($idSession)

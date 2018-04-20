@@ -445,6 +445,16 @@ class AdminController extends Controller
         ));
     }
 
+    public function validerSessionAction($idSession, Request $request) // Affichage des inscription d'une session
+    {
+        var_dump($idSession);
+    }
+
+    public function annulerSessionAction($idSession, Request $request) // Affichage des inscription d'une session
+    {
+        var_dump($idSession);
+    }
+
 	public function suppSessionAction($id, Request $request) // Affichage du formulaire de suppression d'une session
     {
         // Récupération de la session d'identifiant $id
