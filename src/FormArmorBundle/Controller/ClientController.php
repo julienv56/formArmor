@@ -39,10 +39,13 @@ class ClientController extends Controller
                     $session->set('name', $nom);
 
                     $leClient = $rep->getClient($nom);
-
+                    // SI l'ID STATUT DU CLIENT DIFFERENT DE 6 ALORS IL SE CONNECTE EN TANT QUE CLIENT      
                     if ($leClient[0]->getStatut()->getId() != 6) {
-                        return self::listeFormationAction(1);
-                    } else {
+                        return self::listeFormationAction(1, $leClient);
+                    } 
+                    // SINON SI ID STATUT = 6 -> CONNECTER EN TANT QUE ADMINISTRATEUR
+                    else 
+                    {
                         return AdminController::listeStatutAction(1);
                     }
                 }
@@ -62,8 +65,9 @@ class ClientController extends Controller
         return $this->render('FormArmorBundle::layout.html.twig');
     }
 
-    public function listeFormationAction($page)
+    public function listeFormationAction($page, $leClient)
     {
+        dump($leClient);
         if ($page < 1) {
             throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
         }
@@ -96,6 +100,7 @@ class ClientController extends Controller
 
     public function listeSessionAction($page)
     {
+        
         if ($page < 1) {
             throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
         }
@@ -109,7 +114,12 @@ class ClientController extends Controller
         $manager = $this->getDoctrine()->getManager();
         $rep = $manager->getRepository('FormArmorBundle:Session_formation');
         $lesSessions = $rep->listeSessions($page, $nbParPage);
-
+        
+        
+        
+        $rep2 = $manager->getRepository('FormArmorBundle:Inscription');
+        $lesInscriptions = $rep2->listeInscriptions($page, $nbParPage);
+        
         // On calcule le nombre total de pages grâce au count($lesSessions) qui retourne le nombre total de sessions
         $nbPages = ceil(count($lesSessions) / $nbParPage);
 
@@ -122,6 +132,7 @@ class ClientController extends Controller
         return $this->render('FormArmorBundle:Client:session.html.twig', array(
             'textePop'=> 'vide',
             'lesSessions' => $lesSessions,
+            'lesInscriptions' => $lesInscriptions,
             'nbPages' => $nbPages,
             'page' => $page,
         ));

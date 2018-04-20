@@ -5,29 +5,44 @@
 		<thead>
 		<tr>
 			<th>Formation</th>
-            <th>Description</th>
+                        <th>Intitulé</th>
+                        <th>Description</th>
 			<th>Date début</th>
 		</tr>
 		</thead>
 		<tbody>            
 			{% for session in lesSessions %}
 				<tr {# si le nombre de passages dans la boucle est pair #} {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
-                    <td>{{ session.formation.id }}</td>
-                    <td>{{ session.formation.libelle }}-{{ session.formation.niveau }}</td>
-                    <td>{{ session.formation.description }}-{{ session.formation.description }}</td>
-                    <td>{{ session.dateDebut|date('Y-m-d') }}</td>
-                    {% if session.nbInscrits < session.nbPlaces %}
-                        <td><a href="{{ path('form_armor_client_session_inscrire', {'idSession': session.id}) }}"
-                               class="btn" data-toggle="modal">Inscription</a></td>
-                    {% elseif session.nbInscrits == session.nbplaces %}
-                        <td><a>Plus de place disponible</a></td>
-                    {% elseif session.id and session.formation.id %}
-                        <td><a>Pré-inscrit</a></td>
-                    {% endif %}
+                                    <td>{{session.formation.id}}</td>
+                                    <td>{{session.formation.libelle}}-{{session.formation.niveau}}</td>
+                                    <td>{{session.formation.description}}-{{session.formation.description}}</td>
+                                    <td>{{session.dateDebut|date('Y-m-d')}}</td>
+                                    
+                                    
+                                    {%if session.nbInscrits == session.nbplaces%}
+                                        <td>Plus de place disponible</td>
+                                        {# boucler dans les inscriptions #}
+                                    {% else %}
+                                        {% for inscription in lesInscriptions %}
+    
+                                            {% if inscription.sessionformation.formation.id == session.formation.id %}
+                                                <td>Déja effectué</td>
+                                            {% elseif inscription.sessionformation.id == session.id %}
+                                               <td>Inscrit</td>   
+                                            {% elseif inscription.sessionformation.nbInscrits < inscription.sessionformation.nbPlaces %}
+                                                <td><a href="{{ path('form_armor_client_session_inscrire', {'idSession': session.id}) }}" class="btn" data-toggle="modal">Inscription</a></td>
+                                            {% endif%}    
+                                        {% endfor %}
+                                        
+                                    {% endif%}            
+                                       
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
+                <table class="table">
+                    
+                </table>    
 	
 	<ul class="pagination">
 		{# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
