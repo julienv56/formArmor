@@ -15,6 +15,7 @@ class ClientController extends Controller
     {
         // Création du formulaire
         $client = new Client();
+        dump('oui');
         $form = $this->get('form.factory')->create(ClientType::class, $client);
 
 
