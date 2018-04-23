@@ -376,6 +376,7 @@ class AdminController extends Controller
         $rep = $manager->getRepository('FormArmorBundle:Session_formation');
         $lesSessions1 = $rep->listeSessionsAdmin1($page, $nbParPage);
         $lesSessions2 = $rep->listeSessionsAdmin2($page, $nbParPage);
+        $lesSessions3 = $rep->listeSessionsAdmin3($page, $nbParPage);
 
         $nbPages = ceil((count($lesSessions1) + count($lesSessions2)) / $nbParPage);
 
@@ -389,6 +390,7 @@ class AdminController extends Controller
             'textePop' => 'vide',
             'lesSessions1' => $lesSessions1,
             'lesSessions2' => $lesSessions2,
+            'lesSessions3' => $lesSessions3,
             'nbPages' => $nbPages,
             'page' => $page,
         ));
@@ -447,12 +449,29 @@ class AdminController extends Controller
 
     public function validerSessionAction($idSession, Request $request) // Affichage des inscription d'une session
     {
-        var_dump($idSession);
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository('FormArmorBundle:Session_formation');
+        $sessions = $rep->getSession($idSession);
+
+        $sessions[0]->setClose(true);
+
+        $em->persist($sessions[0]);
+        $em->flush();
+
+        return AdminController::listeSessionAction(1);
     }
 
-    public function annulerSessionAction($idSession, Request $request) // Affichage des inscription d'une session
+    public function annulerSessionAction($idSession, $motif, Request $request) // Affichage des inscription d'une session
     {
-        var_dump($idSession);
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository('FormArmorBundle:Inscription');
+        $rep->suppInscriptions($idSession);
+
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository('FormArmorBundle:Session_formation');
+        $rep->suppSession($idSession);
+
+        return AdminController::listeSessionAction(1);
     }
 
 	public function suppSessionAction($id, Request $request) // Affichage du formulaire de suppression d'une session

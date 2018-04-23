@@ -29,10 +29,10 @@
             : {{ total }} €</h2>
         <a class="btn btn-info" href="{{ path('form_armor_admin_valider_session', {'idSession': idSession}) }}"
            role="button">Valider</a>
-        <a id='annuler' class="btn btn-danger" role="button">Annuler</a>
     {% else %}
         <h3>Cette session ne comporte aucun inscrit</h3>
     {% endif %}
+    <a id='annuler' class="btn btn-danger" role="button">Annuler</a>
 
     {% embed "FormArmorBundle::modalText.html.twig" %}
     {% endembed %}

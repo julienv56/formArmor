@@ -14,29 +14,68 @@
         </thead>
         <tbody>
         {% for session in lesSessions1 %}
-
             <tr class="danger">
-                <td>
-                    <a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">{{ session.formation.libelle }}
-                        -{{ session.formation.niveau }}</a></td>
+                {% if session.close == false %}
+                    <td>
+                        <a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">{{ session.formation.libelle }}
+                            -{{ session.formation.niveau }}</a></td>
+                {% else %}
+                    <td>{{ session.formation.libelle }}-{{ session.formation.niveau }}</td>
+                {% endif %}
                 <td>{{ session.formation.description }}-{{ session.formation.description }}</td>
                 <td>{{ session.nbPlaces }}</td>
                 <td>{{ session.nbInscrits }}</td>
                 <td>{{ session.dateDebut|date('Y-m-d') }}</td>
-                <td><a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">Ouvrir</a></td>
+                {% if session.close == false %}
+                    <td><a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">Ouvrir</a>
+                    </td>
+                {% else %}
+                    <td>Close</td>
+                {% endif %}
             </tr>
         {% endfor %}
 
         {% for session in lesSessions2 %}
-            <tr {# si le nombre de passages dans la boucle est pair #} {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
-                <td>
-                    <a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">{{ session.formation.libelle }}
-                        -{{ session.formation.niveau }}</a></td>
+            <tr class="danger">
+                {% if session.close == false %}
+                    <td>
+                        <a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">{{ session.formation.libelle }}
+                            -{{ session.formation.niveau }}</a></td>
+                {% else %}
+                    <td>{{ session.formation.libelle }}-{{ session.formation.niveau }}</td>
+                {% endif %}
                 <td>{{ session.formation.description }}-{{ session.formation.description }}</td>
                 <td>{{ session.nbPlaces }}</td>
                 <td>{{ session.nbInscrits }}</td>
                 <td>{{ session.dateDebut|date('Y-m-d') }}</td>
-                <td><a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">Ouvrir</a></td>
+                {% if session.close == false %}
+                    <td><a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">Ouvrir</a>
+                    </td>
+                {% else %}
+                    <td>Close</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+        {% for session in lesSessions3 %}
+            <tr {# si le nombre de passages dans la boucle est pair #} {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
+                {% if session.close == false %}
+                    <td>
+                        <a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">{{ session.formation.libelle }}
+                            -{{ session.formation.niveau }}</a></td>
+                {% else %}
+                    <td>{{ session.formation.libelle }}-{{ session.formation.niveau }}</td>
+                {% endif %}
+                <td>{{ session.formation.description }}-{{ session.formation.description }}</td>
+                <td>{{ session.nbPlaces }}</td>
+                <td>{{ session.nbInscrits }}</td>
+                <td>{{ session.dateDebut|date('Y-m-d') }}</td>
+                {% if session.close == false %}
+                    <td><a href="{{ path('form_armor_admin_session_affich', {'idSession': session.id}) }}">Ouvrir</a>
+                    </td>
+                {% else %}
+                    <td>Close</td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>

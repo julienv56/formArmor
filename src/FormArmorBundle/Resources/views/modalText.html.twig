@@ -8,10 +8,16 @@
                         <label for="motif">Motif de l'annulation:</label>
                         <input type="text" id="motif" class="form-control" placeholder="Entrez le motif">
                     </div>
-                    <a href="{{ path('form_armor_admin_annuler_session', {'idSession': idSession}) }}"
-                       class="btn btn-primary active">Fermer</a>
+                    <a id="submit" class="btn btn-primary active" onclick="submit()">Fermer</a>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function submit() {
+        var url = '{{ path("form_armor_admin_annuler_session", {'idSession': idSession, 'motif': 'motif'}) }}';
+        url = url.replace("motif", document.getElementById('motif').value);
+        window.location.replace(url);
+    }
+</script>

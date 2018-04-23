@@ -21,8 +21,8 @@ class Session_formationRepository extends EntityRepository
         $Date2->modify('+8 day')->format('Y-m-d');
 
         $queryBuilder = $this->createQueryBuilder('s')
-            ->andWhere('s.dateDebut BETWEEN :today AND :Date2')
-            ->andWhere('s.nbInscrits = s.nbPlaces')
+            ->where('s.dateDebut BETWEEN :today AND :Date2')
+            ->andWhere('s.nbInscrits < s.nbPlaces')
             ->setParameter('today', $DateToday)
             ->setParameter('Date2', $Date2)
             ->orderBy('s.id', 'ASC');
@@ -36,12 +36,32 @@ class Session_formationRepository extends EntityRepository
     public function listeSessionsAdmin2($page, $nbParPage) // Liste toutes les sessions avec pagination
     {
         $DateToday = new \DateTime('now');
+        $DateToday->modify('-1 day')->format('Y-m-d');
+        $Date2 = new \DateTime('now');
+        $Date2->modify('+2 month')->format('Y-m-d');
+
+        $queryBuilder = $this->createQueryBuilder('s')
+            ->where('s.dateDebut BETWEEN :today AND :Date2')
+            ->andWhere('s.nbInscrits = s.nbPlaces')
+            ->setParameter('today', $DateToday)
+            ->setParameter('Date2', $Date2)
+            ->orderBy('s.id', 'ASC');
+
+        $query = $queryBuilder->getQuery();
+        $query->setFirstResult(($page - 1) * $nbParPage)
+            ->setMaxResults($nbParPage);
+        return new Paginator($query, true);
+    }
+
+    public function listeSessionsAdmin3($page, $nbParPage) // Liste toutes les sessions avec pagination
+    {
+        $DateToday = new \DateTime('now');
         $DateToday->modify('+8 day')->format('Y-m-d');
         $Date2 = new \DateTime('now');
         $Date2->modify('+2 month')->format('Y-m-d');
 
         $queryBuilder = $this->createQueryBuilder('s')
-            ->andWhere('s.dateDebut BETWEEN :today AND :Date2')
+            ->where('s.dateDebut BETWEEN :today AND :Date2')
             ->andWhere('s.nbInscrits < s.nbPlaces')
             ->setParameter('today', $DateToday)
             ->setParameter('Date2', $Date2)

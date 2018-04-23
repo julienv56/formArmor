@@ -116,7 +116,7 @@ form_armor_admin_valider_session:
             _controller: FormArmorBundle:Admin:validerSession
 
 form_armor_admin_annuler_session:
-    path:     /admin/session/annuler/{idSession}
+    path:     /admin/session/annuler/{idSession}/{motif}
     defaults:
             _controller: FormArmorBundle:Admin:annulerSession
 
