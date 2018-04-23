@@ -3,6 +3,7 @@
 namespace FormArmorBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * InscriptionRepository
@@ -28,7 +29,7 @@ class InscriptionRepository extends EntityRepository
                 
     }
     
-    public function getInscription($idSession)
+    public function getInscriptions($idSession)
     {
         $queryBuilder = $this->createQueryBuilder('i')
             ->andWhere('i.session_formation =: idSession')
