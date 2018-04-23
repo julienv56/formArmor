@@ -9,9 +9,8 @@
 			<th>Date début</th>
 		</tr>
 		</thead>
-		<tbody>
+		<tbody>            
 			{% for session in lesSessions %}
-                           
 				<tr {# si le nombre de passages dans la boucle est pair #} {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
                     <td>{{ session.formation.id }}</td>
                     <td>{{ session.formation.libelle }}-{{ session.formation.niveau }}</td>
