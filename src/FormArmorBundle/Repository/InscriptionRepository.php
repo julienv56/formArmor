@@ -12,24 +12,30 @@ use Doctrine\ORM\EntityRepository;
  */
 class InscriptionRepository extends EntityRepository
 {
-    public function getInscriptions($idSession) // Liste toutes les sessions avec pagination
+    
+    public function listeInscriptions($page, $nbParPage, $idclient)
     {
         $queryBuilder = $this->createQueryBuilder('i')
-            ->andWhere('i.session_formation = :idSession')
+                ->andWhere('i.client = :idclient')
+                ->setParameter('idclient', $idclient);
+        
+        
+        $query = $queryBuilder->getQuery();
+        $query
+        ->setFirstResult(($page-1)* $nbParPage)
+        ->setMaxResults($nbParPage);
+        return new Paginator($query, true);
+                
+    }
+    
+    public function getInscription($idSession)
+    {
+        $queryBuilder = $this->createQueryBuilder('i')
+            ->andWhere('i.session_formation =: idSession')
             ->setParameter('idSession', $idSession)
             ->orderBy('i.id', 'ASC');
 
         $query = $queryBuilder->getQuery();
         return $query->getResult();
-    }
-
-    public function suppInscriptions($idSession)
-    {
-        $qb = $this->createQueryBuilder('i');
-        $qb->delete('FormArmorBundle\Entity\Inscription', 'i')
-            ->where('i.session_formation = :idSession')
-            ->setParameter('idSession', $idSession);
-
-        return $qb->getQuery()->getResult();
     }
 }

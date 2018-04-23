@@ -7,6 +7,7 @@ use FormArmorBundle\Form\StatutType;
 use FormArmorBundle\Form\FormationType;
 use FormArmorBundle\Form\SessionType;
 use FormArmorBundle\Form\PlanFormationType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
