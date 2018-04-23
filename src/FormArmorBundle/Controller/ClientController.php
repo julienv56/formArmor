@@ -7,7 +7,6 @@ use FormArmorBundle\Form\ClientType;
 use FormArmorBundle\Entity\Client;
 use FormArmorBundle\Entity\Inscription;
 use FormArmorBundle\Entity\Session_formation;
-use FormArmorBundle\Entity\Plan_formation;
 use Symfony\Component\HttpFoundation\Request;
 
 class ClientController extends Controller
@@ -16,6 +15,7 @@ class ClientController extends Controller
     {
         // Création du formulaire
         $client = new Client();
+        dump('oui');
         $form = $this->get('form.factory')->create(ClientType::class, $client);
 
 
@@ -109,7 +109,7 @@ class ClientController extends Controller
         $manager = $this->getDoctrine()->getManager();
         $rep = $manager->getRepository('FormArmorBundle:Session_formation');
         $lesSessions = $rep->listeSessions($page, $nbParPage);
-        
+
         // On calcule le nombre total de pages grâce au count($lesSessions) qui retourne le nombre total de sessions
         $nbPages = ceil(count($lesSessions) / $nbParPage);
 
