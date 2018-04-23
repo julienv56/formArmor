@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5ee8f572-f4bc-42db-a3c5-35603e16b570" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/FormArmorBundle/Repository/InscriptionRepository.php" afterPath="$PROJECT_DIR$/src/FormArmorBundle/Repository/InscriptionRepository.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +19,8 @@
       <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Controller/AdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-504">
-              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state relative-caret-position="420">
+              <caret line="36" column="62" lean-forward="true" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
               <folding>
                 <element signature="e#46#89#0#PHP" expanded="true" />
                 <element signature="e#18668#18703#1#PHP" expanded="true" />
@@ -58,7 +57,7 @@
             <state relative-caret-position="392">
               <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding>
-                <element signature="e#778#814#0#PHP" expanded="true" />
+                <element signature="e#783#819#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,7 +67,7 @@
         <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/session.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-408">
-              <caret line="68" column="88" lean-forward="true" selection-start-line="68" selection-start-column="88" selection-end-line="68" selection-end-column="88" />
+              <caret line="68" column="88" lean-forward="false" selection-start-line="68" selection-start-column="88" selection-end-line="68" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -397,7 +396,7 @@
       <workItem from="1523860598629" duration="16782000" />
       <workItem from="1524033214473" duration="15030000" />
       <workItem from="1524214734071" duration="1602000" />
-      <workItem from="1524463291148" duration="13639000" />
+      <workItem from="1524463291148" duration="14861000" />
     </task>
     <task id="LOCAL-00001" summary="Test Commit PhpStorm">
       <created>1522312933279</created>
@@ -490,14 +489,22 @@
       <option name="project" value="LOCAL" />
       <updated>1524487201604</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Developpement Cote Admin, Sessions et validations finies.">
+      <created>1524488275622</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1524488275622</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82202000" />
+    <option name="totallyTimeSpent" value="83424000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -831,7 +838,7 @@
         <state relative-caret-position="392">
           <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <element signature="e#778#814#0#PHP" expanded="true" />
+            <element signature="e#783#819#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -909,15 +916,15 @@
     <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Resources/views/Admin/session.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-408">
-          <caret line="68" column="88" lean-forward="true" selection-start-line="68" selection-start-column="88" selection-end-line="68" selection-end-column="88" />
+          <caret line="68" column="88" lean-forward="false" selection-start-line="68" selection-start-column="88" selection-end-line="68" selection-end-column="88" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FormArmorBundle/Controller/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-504">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="420">
+          <caret line="36" column="62" lean-forward="true" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
           <folding>
             <element signature="e#46#89#0#PHP" expanded="true" />
             <element signature="e#18668#18703#1#PHP" expanded="true" />
