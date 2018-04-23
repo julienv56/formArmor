@@ -27,21 +27,26 @@ class ClientController extends Controller
                 $donneePost = $request->request->get('client');
                 $nom = $donneePost['nom'];
                 $mdp = $donneePost['password'];
- 
+                
                 // Controle du nom et du mdp
                 $manager = $this->getDoctrine()->getManager();
                 $rep = $manager->getRepository('FormArmorBundle:Client');
-
+                
+                
+                
                 $nbClient = $rep->verifMDP($nom, $mdp);
 
                 if ($nbClient > 0) {
                     $session = $session = $request->getSession();
                     $session->set('name', $nom);
-
+                    
                     $leClient = $rep->getClient($nom);
                     // SI l'ID STATUT DU CLIENT DIFFERENT DE 6 ALORS IL SE CONNECTE EN TANT QUE CLIENT      
                     if ($leClient[0]->getStatut()->getId() != 6) {
-                        return self::listeFormationAction(1, $leClient);
+                        $id = $leClient[0]->getId();
+                    $session->set('id', $id);
+                        
+                        return self::listeFormationAction(1);
                     } 
                     // SINON SI ID STATUT = 6 -> CONNECTER EN TANT QUE ADMINISTRATEUR
                     else 
@@ -61,13 +66,12 @@ class ClientController extends Controller
     {
         $session = $request->getSession();
         $session->remove($session->get('name'));
-
         return $this->render('FormArmorBundle::layout.html.twig');
     }
 
-    public function listeFormationAction($page, $leClient)
+    public function listeFormationAction($page)
     {
-        dump($leClient);
+    
         if ($page < 1) {
             throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
         }
@@ -115,10 +119,10 @@ class ClientController extends Controller
         $rep = $manager->getRepository('FormArmorBundle:Session_formation');
         $lesSessions = $rep->listeSessions($page, $nbParPage);
         
-        
+        $idclient = $this->get('Session')->get('id');
         
         $rep2 = $manager->getRepository('FormArmorBundle:Inscription');
-        $lesInscriptions = $rep2->listeInscriptions($page, $nbParPage);
+        $lesInscriptions = $rep2->listeInscriptions($page, $nbParPage, $idclient);
         
         // On calcule le nombre total de pages grâce au count($lesSessions) qui retourne le nombre total de sessions
         $nbPages = ceil(count($lesSessions) / $nbParPage);
@@ -149,7 +153,13 @@ class ClientController extends Controller
         $manager = $this->getDoctrine()->getManager();
         $rep = $manager->getRepository('FormArmorBundle:Session_formation');
         $lesSessions = $rep->listeSessions(1, $nbParPage);
-
+      
+        
+        $idclient = $this->get('Session')->get('id');
+        $rep2 = $manager->getRepository('FormArmorBundle:Inscription');
+        $lesInscriptions = $rep2->listeInscriptions(1, $nbParPage, $idclient);
+        
+        
         // On calcule le nombre total de pages grâce au count($lesSessions) qui retourne le nombre total de sessions
         $nbPages = ceil(count($lesSessions) / $nbParPage);
         $nomPrenom = $request->getSession()->get('name');
@@ -158,15 +168,17 @@ class ClientController extends Controller
                         ->getClient($nomPrenom);
         $client = $clients[0];
         
+        
         if($client->getEmail() != "")
         {
+            
             $sessions = $this->getDoctrine()->getRepository(Session_formation::class)->getSession($idSession);
             $session = $sessions[0];
             $idFormation = $session->getFormation()->getId();
 
             $formations = $this->getDoctrine()->getRepository('FormArmorBundle:Formation')->getFormation($idFormation);
             $formation = $formations[0];
-
+        
             if($formation->getTypeForm() == "Bureautique")
             {
                 //Verifier si l'utilisateur a assez d'heures pour faire la formation
@@ -177,20 +189,29 @@ class ClientController extends Controller
                 $sessions = $this->getDoctrine()->getRepository(Session_formation::class)
                                                 ->getSession($idSession);
                 $session = $sessions[0];
-
+                 
+                
                 $inscription= new Inscription();
                 $inscription->setClient($client);    
                 $inscription->setSessionFormation($session);
-                $inscription->setDateInscription($dateToday);  
-                // tell Doctrine you want to (eventually) save the Product (no queries yet)
+                $inscription->setDateInscription($dateToday); 
+                
+                
                 $manager->persist($inscription);
-                // actually executes the queries (i.e. the INSERT query)
                 $manager->flush();
 
+                $client->setNbhbur($client->getNbhbur()- $formation->getDuree());
+                $manager->persist($client);
+                $manager->flush();
+                
+                $session->setNbInscrits($session->getNbInscrits()+1);
+                $manager->persist($session);
+                $manager->flush();
                 $message = "Vous êtes bien pré-inscrit";
                 return $this->render('FormArmorBundle:Client:session.html.twig', array(
                                                                             'textePop' => $message, 
                                                                             'lesSessions' => $lesSessions,
+                                                                            'lesInscriptions' => $lesInscriptions,
                                                                             'nbPages' => $nbPages,
                                                                             'page' => 1,));
                 }
@@ -200,6 +221,7 @@ class ClientController extends Controller
                     return $this->render('FormArmorBundle:Client:session.html.twig', array(
                                                                                 'textePop' => $message, 
                                                                                 'lesSessions' => $lesSessions,
+                                                                                'lesInscriptions' => $lesInscriptions,
                                                                                 'nbPages' => $nbPages,
                                                                                 'page' => 1,));
                 }
@@ -223,10 +245,19 @@ class ClientController extends Controller
                     // actually executes the queries (i.e. the INSERT query)
                     $manager->flush();
 
+                    $client->setNbhcpta($client->getNbhcpta()- $formation->getDuree());
+                    $manager->persist($client);
+                    $manager->flush();
+
+                    $session->setNbInscrits($session->getNbInscrits()+1);
+                    $manager->persist($session);
+                    $manager->flush();
+                
                     $message = "Vous êtes bien pré-inscrit";
                     return $this->render('FormArmorBundle:Client:session.html.twig', array(
                                                                                 'textePop' => $message, 
                                                                                 'lesSessions' => $lesSessions,
+                                                                                'lesInscriptions' => $lesInscriptions,
                                                                                 'nbPages' => $nbPages,
                                                                                 'page' => 1,));
                 }
@@ -236,6 +267,7 @@ class ClientController extends Controller
                     return $this->render('FormArmorBundle:Client:session.html.twig', array(
                                                                                 'textePop' => $message, 
                                                                                 'lesSessions' => $lesSessions,
+                                                                                'lesInscriptions' => $lesInscriptions,
                                                                                 'nbPages' => $nbPages,
                                                                                 'page' => 1,));
                 }

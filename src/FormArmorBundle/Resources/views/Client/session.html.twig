@@ -10,7 +10,7 @@
 			<th>Date début</th>
 		</tr>
 		</thead>
-		<tbody>            
+		<tbody>       
 			{% for session in lesSessions %}
 				<tr {# si le nombre de passages dans la boucle est pair #} {% if loop.index is even %} class="success" {% else %} class="info" {% endif %}>
                                     <td>{{session.formation.id}}</td>
@@ -23,17 +23,24 @@
                                         <td>Plus de place disponible</td>
                                         {# boucler dans les inscriptions #}
                                     {% else %}
-                                        {% for inscription in lesInscriptions %}
-    
-                                            {% if inscription.sessionformation.formation.id == session.formation.id %}
-                                                <td>Déja effectué</td>
-                                            {% elseif inscription.sessionformation.id == session.id %}
-                                               <td>Inscrit</td>   
-                                            {% elseif inscription.sessionformation.nbInscrits < inscription.sessionformation.nbPlaces %}
-                                                <td><a href="{{ path('form_armor_client_session_inscrire', {'idSession': session.id}) }}" class="btn" data-toggle="modal">Inscription</a></td>
-                                            {% endif%}    
-                                        {% endfor %}
-                                        
+                                        {% if lesInscriptions is not empty %}
+                                            {% for inscription in lesInscriptions %}
+                                                <td>
+                                                    {% if inscription.sessionformation.id == session.id %}
+                                                       Inscrit  
+                                                       {% if session.dateDebut|date('Y-m-d') < 'now'|date('Y-m-d') %}
+                                                        et déja effectué
+                                                        {% endif %}
+                                                        {% else %}
+                                                            <a href="{{ path('form_armor_client_session_inscrire', {'idSession': session.id}) }}" class="btn" data-toggle="modal">Inscription</a>
+                                                    {% endif %}
+                                                    
+                                                    
+                                                </td>
+                                            {% endfor %}
+                                        {% else %}
+                                            <td><a href="{{ path('form_armor_client_session_inscrire', {'idSession': session.id}) }}" class="btn" data-toggle="modal">Inscription</a></td>
+                                        {% endif %}
                                     {% endif%}            
                                        
 				</tr>

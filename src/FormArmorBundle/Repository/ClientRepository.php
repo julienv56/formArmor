@@ -11,14 +11,14 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ClientRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function verifMDP($nom, $mdp) // Controle du nom et du mot de passe
-	{
-		$qb = $this->createQueryBuilder('c');
-		$qb->select('COUNT(c)');
-		$qb->andWhere('c.nom = :nom AND c.password = :mdp')->setParameter('nom', $nom)->setParameter('mdp',   $mdp);
-		return $qb->getQuery()->getSingleScalarResult();
-	}
-
+    public function verifMDP($nom, $mdp) // Controle du nom et du mot de passe
+    {
+            $qb = $this->createQueryBuilder('c');
+            $qb->select('COUNT(c)');
+            $qb->andWhere('c.nom = :nom AND c.password = :mdp')->setParameter('nom', $nom)->setParameter('mdp',   $mdp);
+            return $qb->getQuery()->getSingleScalarResult();
+    }
+    
     public function getClient($nom)
     {
         $qb = $this->createQueryBuilder('c');
