@@ -28,11 +28,11 @@ class InscriptionRepository extends EntityRepository
         return new Paginator($query, true);
                 
     }
-    
+
     public function getInscriptions($idSession)
     {
         $queryBuilder = $this->createQueryBuilder('i')
-            ->andWhere('i.session_formation =: idSession')
+            ->andWhere('i.session_formation = :idSession')
             ->setParameter('idSession', $idSession)
             ->orderBy('i.id', 'ASC');
 
