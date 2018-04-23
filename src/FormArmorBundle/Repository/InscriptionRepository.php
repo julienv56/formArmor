@@ -22,4 +22,14 @@ class InscriptionRepository extends EntityRepository
         $query = $queryBuilder->getQuery();
         return $query->getResult();
     }
+
+    public function suppInscriptions($idSession)
+    {
+        $qb = $this->createQueryBuilder('i');
+        $qb->delete('FormArmorBundle\Entity\Inscription', 'i')
+            ->where('i.session_formation = :idSession')
+            ->setParameter('idSession', $idSession);
+
+        return $qb->getQuery()->getResult();
+    }
 }
