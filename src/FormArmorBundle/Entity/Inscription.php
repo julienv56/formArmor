@@ -3,6 +3,8 @@
 namespace FormArmorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FormArmorBundle\Entity\Client;
+use FormArmorBundle\Entity\Session_formation;
 
 /**
  * Inscription
@@ -78,11 +80,11 @@ class Inscription
     /**
      * Set client
      *
-     * @param \FormArmorBundle\Entity\Client $client
+     * @param Client $client
      *
      * @return Inscription
      */
-    public function setClient(\FormArmorBundle\Entity\Client $client)
+    public function setClient(Client $client)
     {
         $this->client = $client;
 
@@ -92,7 +94,7 @@ class Inscription
     /**
      * Get client
      *
-     * @return \FormArmorBundle\Entity\Client
+     * @return Client
      */
     public function getClient()
     {
@@ -102,11 +104,11 @@ class Inscription
     /**
      * Set sessionFormation
      *
-     * @param \FormArmorBundle\Entity\Session_formation $sessionFormation
+     * @param Session_formation $sessionFormation
      *
      * @return Inscription
      */
-    public function setSessionFormation(\FormArmorBundle\Entity\Session_formation $sessionFormation)
+    public function setSessionFormation(Session_formation $sessionFormation)
     {
         $this->session_formation = $sessionFormation;
 
@@ -116,7 +118,7 @@ class Inscription
     /**
      * Get sessionFormation
      *
-     * @return \FormArmorBundle\Entity\Session_formation
+     * @return Session_formation
      */
     public function getSessionFormation()
     {

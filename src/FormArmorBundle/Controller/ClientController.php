@@ -182,7 +182,7 @@ class ClientController extends Controller
             if($formation->getTypeForm() == "Bureautique")
             {
                 //Verifier si l'utilisateur a assez d'heures pour faire la formation
-                if ($client->getNbhbur() > $formation->getDuree())
+                if ($client->getNbhbur() >= $formation->getDuree())
                 {
                     $dateToday = new \DateTime('now');
 
@@ -228,7 +228,7 @@ class ClientController extends Controller
             }
             else
             {
-                if ($client->getNbhcpta() > $formation->getDuree())
+                if ($client->getNbhcpta() >= $formation->getDuree())
                 {
                     $dateToday = new \DateTime('now');
 

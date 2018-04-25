@@ -465,6 +465,34 @@ class AdminController extends Controller
     public function annulerSessionAction($idSession, $motif, Request $request) // Affichage des inscription d'une session
     {
         $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository('FormArmorBundle:Session_formation');
+        $sessions = $rep->getSession($idSession);
+
+        $formation = $sessions[0]->getFormation();
+        $typeFormation = $formation->getTypeForm();
+        $dureeFormation = $formation->getDuree();
+
+
+        $manager = $this->getDoctrine()->getManager();
+        $rep = $manager->getRepository('FormArmorBundle:Inscription');
+        $lesInscriptions = $rep->getInscriptions($idSession);
+
+        foreach ($lesInscriptions as $inscription) {
+            $client = $inscription->getClient();
+
+            if ($typeFormation == "Bureautique") {
+                $actualHours = $client->getNbhbur();
+                $client->setNbhbur($actualHours - $dureeFormation);
+            } else {
+                $actualHours = $client->getNbhcpta();
+                $client->setNbhcpta($actualHours - $dureeFormation);
+            }
+
+            $em->persist($client);
+            $em->flush();
+        }
+
+        $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository('FormArmorBundle:Inscription');
         $rep->suppInscriptions($idSession);
 
